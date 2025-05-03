@@ -29,7 +29,7 @@
     
 
              // Load saved mode on page load
-             const isDark = localStorage.getItem("theme") === "dark";
+          const isDark = localStorage.getItem("theme") === "dark";
           const toggle = document.getElementById("darkModeToggle");
           console.log(toggle)
           if (toggle) {
@@ -110,6 +110,52 @@
           miniCart.appendChild(div);
         });
       }
+
+      function decreaseQty(id) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const index = cart.findIndex(item => item.id === id);
+        if (index !== -1) {
+          if (cart[index].qty > 1) {
+            cart[index].qty -= 1;
+          } else {
+            cart.splice(index, 1); // remove item
+          }
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartCount();
+          updateMiniCart();
+      }
+  }
+
+  function increaseQty(id) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const item = cart.find(i => i.id === id);
+    if (item) {
+      item.qty += 1;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      updateMiniCart();
+    }
+  }
+
+       // event delegation concept
+      document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("add-to-cart")) {
+          const id = +e.target.getAttribute("data-id");
+          console.log(id)
+          const product = allProducts.find(p => p.id === id);
+          addToCart(product);
+        }
+      
+        if (e.target.classList.contains("decrease-qty")) {
+          const id = +e.target.getAttribute("data-id");
+          decreaseQty(id);
+        }
+      
+        if (e.target.classList.contains("increase-qty")) {
+          const id = +e.target.getAttribute("data-id");
+          increaseQty(id);
+        }
+      });
 
 
       function getInitials(username) {

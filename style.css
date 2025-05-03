@@ -405,7 +405,7 @@ button:hover {
   position: relative;
   margin-inline: auto;
   height: 100%;
-  width: 100%;
+  width: 50%;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -421,7 +421,7 @@ button:hover {
 .carousel-slide img {
   width: 100%;
   display: block;
-  height: 750px;
+  height: 400px;
 }
 .carousel-buttons {
   position: absolute;

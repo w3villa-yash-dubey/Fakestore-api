@@ -83,6 +83,7 @@
   const miniCart = document.querySelector(".mini-cart");
 
   cartIcon.addEventListener("click" , (e) => {
+    updateMiniCart()
     miniCart.classList.toggle("mini-cart-visible");
   });
 
