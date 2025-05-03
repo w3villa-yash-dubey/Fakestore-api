@@ -284,11 +284,15 @@ button:hover {
   border-radius: 20px;
 }
 
-.sidebar #applyFilters {
+.sidebar #applyFilters { 
   transform: translateX(-40px);
   background-color: red;
 }
 
+.sidebar #resetFilters { 
+  transform: translateX(-40px);
+  background-color: red;
+}
 
 
 

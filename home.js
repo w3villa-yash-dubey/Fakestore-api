@@ -215,6 +215,7 @@ function updateMiniCart() {
   });
 
   const applyFilters = document.getElementById("applyFilters");
+  const resetFilters = document.getElementById("resetFilters");
 
   applyFilters.addEventListener("click", (e) => {
     const min = parseFloat(document.getElementById("minPrice").value) || 0;
@@ -225,6 +226,11 @@ function updateMiniCart() {
     if (category) currentList = currentList.filter(p => p.category === category);
   
     displayPaginated(1); // by default first page that's why 1 is passed in parameter
+  });
+
+  resetFilters.addEventListener("click", (e) => {
+    currentList = allProducts;
+    displayPaginated(1); 
   });
   
   
