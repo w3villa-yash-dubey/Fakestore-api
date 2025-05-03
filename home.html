@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- side bar -->
+  <div class="sidebar">
+    <button id="closeSidebar">✖</button>
+    <h3>Filters</h3>
+
+    <!-- Price Filter -->
+    <label>Price Range</label>
+    <input type="number" id="minPrice" placeholder="Min Price" />
+    <input type="number" id="maxPrice" placeholder="Max Price" />
+    
+    <!-- Category Filter -->
+    <label>Category</label>
+    <select id="categorySelect">
+      <option value="">All Categories</option>
+      <!-- JS will populate the rest -->
+    </select>
+  
+    <button id="applyFilters">Apply Filters</button>
+  </div>
+
+  <!-- side bar -->
+
+  <div class="shop-header">
+    <div class="hamburger" id="menuToggle">☰</div>
+
+    <h1>Journal</h1>
+    <div class="header-buttons">
+    </div>
+    
+    <div class="cart-container">
+        <div class="cart-icon" id="cartIcon" style="font-size: 30px;">🛒 <span id="cartCount" style="font-size: 20px;">0</span></div>
+        <div class="mini-cart" id="miniCart"></div>
+    </div>
+    
+    <div class="total-price">total price : $0</div>
+
+    <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+
+    <div class="user-name-letter"></div>
+    
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+ 
+  <!-- carousel -->
+  <!-- <div class="outer">
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://img.freepik.com/free-psd/3d-rendering-ecommerce-background_23-2151386696.jpg?ga=GA1.1.1780565752.1746075554&semt=ais_hybrid&w=740" alt="Slide 1" /></div>
+        <div class="carousel-slide"><img src="https://img.freepik.com/free-psd/3d-rendering-ecommerce-background_23-2151386710.jpg?ga=GA1.1.1780565752.1746075554&w=740" alt="Slide 2" /></div>
+        <div class="carousel-slide"><img src="https://img.freepik.com/free-psd/3d-rendering-ecommerce-background_23-2151386703.jpg?ga=GA1.1.1780565752.1746075554&w=740" alt="Slide 3" /></div>
+      </div>
+      <div class="carousel-buttons">
+        <button class="carousel-button prev">&#10094;</button>
+        <button class="carousel-button next">&#10095;</button>
+      </div>
+    </div>
+   </div> -->
+  <!-- carousel -->
+  
+  <div class="shop-container">
+
+    <div class="searchBar">
+      <input type="text" id="searchInput" placeholder="Search products..." />
+      <button id="searchBtn">Search</button>
+    </div>
+    
+    <div id="productList" class="product-list"></div>
+    <div id="pagination" class="pagination"></div>
+  </div>
+
+
+  <!-- footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        });
+    </script>
+  <!-- footer -->
+
+  <script>
+    // Load saved mode on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      const isDark = localStorage.getItem("theme") === "dark";
+      if (isDark) {
+        document.body.classList.add("dark-mode");
+      }
+  
+      const toggle = document.getElementById("darkModeToggle");
+      if (toggle) {
+        toggle.textContent = isDark ? "☀️" : "🌙";
+  
+        toggle.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const isDarkNow = document.body.classList.contains("dark-mode");
+          localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+          toggle.textContent = isDarkNow ? "☀️" : "🌙";
+        });
+      }
+    });
+  </script>
+  
+
+  <script>
+      const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.next');
+        const prevButton = document.querySelector('.prev');
+        let currentIndex = 0;
+        function updateSlide(index) {
+          const slideWidth = slides[0].getBoundingClientRect().width;
+          track.style.transform = 'translateX(-' + (slideWidth * index) + 'px)';
+        }
+        nextButton.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateSlide(currentIndex);
+        });
+        prevButton.addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          updateSlide(currentIndex);
+        });
+        setInterval(() => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateSlide(currentIndex);
+        }, 3000);
+    </script>
+
+  <script src="./home.js"></script>
+</body>
+</html>

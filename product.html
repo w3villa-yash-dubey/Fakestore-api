@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Detail</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  
+  <div class="shop-header"></div>
+
+
+  <script>
+    fetch("./header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.querySelector(".shop-header").innerHTML = data;
+
+        function logout() {
+          localStorage.removeItem("loggedInUser");
+          window.location.href = "index.html";
+        }
+
+        document.querySelector(".logout-btn").addEventListener("click" , (e) => {
+          console.log("logout")
+          logout()
+        })
+    
+
+             // Load saved mode on page load
+             const isDark = localStorage.getItem("theme") === "dark";
+          const toggle = document.getElementById("darkModeToggle");
+          console.log(toggle)
+          if (toggle) {
+            toggle.textContent = isDark ? "☀️" : "🌙";
+
+            toggle.addEventListener("click", () => {
+              document.body.classList.toggle("dark-mode");
+              const isDarkNow = document.body.classList.contains("dark-mode");
+              localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+              toggle.textContent = isDarkNow ? "☀️" : "🌙";
+            });
+          }
+
+
+        let nameletter = localStorage.getItem("loggedInUser");
+        let username = getInitials(nameletter);
+        console.log(username);
+
+        let u = document.querySelector(".user-name-letter");
+        u.textContent = `${username}`;
+
+
+        const cartIcon = document.querySelector(".cart-icon");
+        const miniCart = document.querySelector(".mini-cart");
+
+        cartIcon.addEventListener("click" , (e) => {
+          miniCart.classList.toggle("mini-cart-visible");
+        });
+
+          // side bar
+
+        const sidebar = document.querySelector(".sidebar");
+        const hamburger = document.querySelector(".hamburger");
+        const closesidebar = document.querySelector("#closeSidebar");
+
+        hamburger.addEventListener("click" , (e) => {
+          sidebar.classList.add("active");
+        });
+
+        closesidebar.addEventListener("click" , (e) => {
+          sidebar.classList.remove("active");
+        });
+
+        updateCartCount();
+        updateMiniCart();
+      });
+
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const total = cart.reduce((sum, item) => sum + item.qty, 0);
+        const totalPrice = cart.reduce((sum , item) => sum + item.price*item.qty , 0);
+        console.log(totalPrice)
+        document.querySelector(".total-price").textContent = `total price : $${Math.floor(totalPrice)}`;
+        document.getElementById("cartCount").textContent = total;
+      }
+
+      function updateMiniCart() {
+        const miniCart = document.getElementById("miniCart");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (cart.length === 0) {
+          miniCart.innerHTML = "<p>No items in cart.</p>";
+          return;
+        }
+
+        miniCart.innerHTML = "";
+        cart.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "cart-item";
+          div.innerHTML = `
+            <span>${item.title}</span>
+            <div>
+              <button class="decrease-qty" data-id="${item.id}">-</button>
+              <button class="increase-qty" data-id="${item.id}">+</button>
+              <span>${item.qty}</span>
+            </div>
+          `;
+          miniCart.appendChild(div);
+        });
+      }
+
+
+      function getInitials(username) {
+        console.log(username.split(" "))
+        return username                       
+          .split(" ")                    
+          .map(word => word[0])           
+          .join('')                       
+          .toUpperCase();                 
+      }
+  </script>
+
+
+  <div id="productDetail" class="product-detail"></div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      });
+  </script>
+
+      <script>
+           document.addEventListener("DOMContentLoaded", () => {
+          const isDark = localStorage.getItem("theme") === "dark";
+          if (isDark) {
+            document.body.classList.add("dark-mode");
+          }})
+
+      </script> 
+
+
+  <script src="./product.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+ <!-- side bar -->
+ <div class="sidebar">
+    <button id="closeSidebar">✖</button>
+    <h3>Filters</h3>
+
+    <!-- Price Filter -->
+    <label>Price Range</label>
+    <input type="number" id="minPrice" placeholder="Min Price" />
+    <input type="number" id="maxPrice" placeholder="Max Price" />
+    
+    <!-- Category Filter -->
+    <label>Category</label>
+    <select id="categorySelect">
+      <option value="">All Categories</option>
+      <!-- JS will populate the rest -->
+    </select>
+  
+    <button id="applyFilters">Apply Filters</button>
+  </div>
+
+  <!-- side bar -->
+
+
+<div class="hamburger" id="menuToggle">☰</div>
+
+<h1>Journal</h1>
+<div class="header-buttons">
+</div>
+
+<div class="cart-container">
+    <div class="cart-icon" id="cartIcon" style="font-size: 30px;">🛒 <span id="cartCount" style="font-size: 20px;">0</span></div>
+    <div class="mini-cart" id="miniCart"></div>
+</div>
+
+<div class="total-price">total price : $0</div>
+
+<button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+
+<div class="user-name-letter"></div>
+
+<button onclick="logout()" class="logout-btn">Logout</button>
+
