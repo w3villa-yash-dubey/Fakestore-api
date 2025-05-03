@@ -2,6 +2,7 @@
     window.location.href = "index.html";
   }
 
+  
   fetchProducts();
   
 

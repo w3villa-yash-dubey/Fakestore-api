@@ -27,6 +27,10 @@
           logout()
         })
     
+        const titleName = document.querySelector(".websitetitle");
+          titleName.addEventListener("click" , (e) => {
+            window.location.href = "home.html";
+          })
 
              // Load saved mode on page load
           const isDark = localStorage.getItem("theme") === "dark";

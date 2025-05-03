@@ -113,6 +113,7 @@ button:hover {
 }
 
 .shop-header  h1 {
+  cursor: pointer;
   color: white;
 }
 
@@ -574,8 +575,17 @@ body.dark-mode footer , body.dark-mode .shop-header {
     width: 80%;
   }
 
+  
   .sidebar #applyFilters , #minPrice , #maxPrice {
     width: 80%;
+  }
+
+  .sidebar #applyFilters {
+    transform: translateX(-100px);
+  }
+
+  .sidebar #resetFilters {
+    transform: translateX(-100px);
   }
 
   .pagination {
@@ -649,5 +659,14 @@ body.dark-mode footer , body.dark-mode .shop-header {
 
   .footer-bottom {
     font-size: 0.8em;
+  }
+
+  .sidebar #applyFilters {
+    transform: translateX(-20px);
+  }
+
+  .sidebar #resetFilters {
+    width: 80%;
+    transform: translateX(-20px);
   }
 }
